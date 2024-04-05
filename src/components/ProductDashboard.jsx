@@ -40,7 +40,7 @@ export default function ProductDashboard() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/products`);
+      const response = await axios.get(`https://api.flipkarttech.com/products`);
       const rowsWithIds = response.data.map((row, index) => ({ ...row, id: index + 1 }));
       setData(rowsWithIds);
     } catch (error) {
@@ -76,7 +76,7 @@ export default function ProductDashboard() {
 
   const handleDialogSubmit = (productData) => {
     // Send data to POST API
-    axios.post('http://localhost:8000/addProducts', productData)
+    axios.post('https://api.flipkarttech.com/addProducts', productData)
       .then(response => {
         console.log('Post successful', response);
         closeDialog();

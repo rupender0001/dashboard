@@ -26,8 +26,7 @@ export default function OrderTable() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/getOrder`);
-      console.log(response)
+      const response = await axios.get(`https://api.flipkarttech.com/getOrder`);
       const rowsWithIds = response.data.map((row, index) => ({ ...row, id: index + 1 }));
       setData(rowsWithIds);
     } catch (error) {
@@ -60,7 +59,6 @@ export default function OrderTable() {
   };
 
   const handleDialogSubmit = () => {
-    // Handle submit logic here
     console.log('Submitted value:', inputValue);
     closeDialog();
   };

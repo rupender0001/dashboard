@@ -25,7 +25,7 @@ export default function Header() {
                     <img src={HamburgerIcon} alt="Hamburger Icon" style={{ width: '25px', height: '25px' }} />
                 </div>
                 <div style={{ fontWeight: 'bold', fontSize: 'xxx-large', fontFamily: 'monospace' }}>
-                    <a href="/" style={{ textDecoration: 'none', color: 'black' }}>Flipkart </a>
+                    <a href="/home" style={{ textDecoration: 'none', color: 'black' }}>Flipkart </a>
                 </div>
                 <div style={{ position: 'absolute', left: '1400px', cursor: 'pointer', bottom: '30px', border: '1px solid lightblue', borderRadius: '4px' }}>
                     <Button onClick={handleLogout}>Logout</Button>
@@ -35,9 +35,6 @@ export default function Header() {
             <div style={{ position: 'fixed', top: 0, left: 0, width: '300px', height: '100%', background: '#9cb8b8', zIndex: 999 }}>
                 <div style={{ textAlign: 'left', padding: '10px' }}>
                 <img src={CrossIcon} alt="Hamburger Icon" style={{ width: '25px', height: '25px', cursor: 'pointer' }} onClick={toggleDrawer}/>
-                </div>
-                <div style={{ padding: '10px', color: 'black', fontFamily: 'monospace', fontSize: 'x-large' }}>
-                    <a href="/dealers" style={{ textDecoration: 'none', color: 'black' }}>All Dealers</a>
                 </div>
                 <div style={{ padding: '10px', color: 'black', fontFamily: 'monospace', fontSize: 'x-large' }}>
                     <a href="/users" style={{ textDecoration: 'none', color: 'black' }}>All Users</a>

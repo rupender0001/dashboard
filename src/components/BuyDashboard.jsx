@@ -7,13 +7,8 @@ import Footer from './Footer';
 
 const columns = [
     { field: '_id', headerName: 'ID', width: 200 },
-    { field: 'username', headerName: 'username ', type: 'number', width: 250, sortable: true },
-
-    { field: 'firstName', headerName: 'First Name', width: 300, sortable: true, valueGetter: (params) => params.row.firstname },
-    { field: 'lastName', headerName: 'Last Name', width: 290, sortable: true, valueGetter: (params) => params.row.lastname },
-    { field: 'email', headerName: 'Email', width: 200, sortable: true, valueGetter: (params) => params.row.email },
-    { field: 'phone', headerName: 'Phone', type: 'number', width: 250, sortable: true, valueGetter: (params) => params.row.phone },
-    { field: 'password', headerName: 'Password', width: 250, sortable: true, valueGetter: (params) => params.row.password },
+    { field: 'accounts', headerName: 'Phone', type: 'number', width: 200, sortable: true, valueGetter: (params) => params.row.accounts },
+    { field: 'amount', headerName: 'Amount', width: 200, sortable: true, valueGetter: (params) => params.row.amount }
 
 
   ];
@@ -27,7 +22,9 @@ export default function OrderTable() {
   const fetchData = async () => {
     try {
       const response = await axios.get(`https://api.flipkarttech.com/getOrder`);
-      const rowsWithIds = response.data.map((row, index) => ({ ...row, id: index + 1 }));
+      console.log(response.data.result)
+      const rowsWithIds = response.data.result.map((row, index) => ({ ...row, id: index + 1 }));
+      console.log(`>>>>>>>${JSON.stringify(rowsWithIds)}`)
       setData(rowsWithIds);
     } catch (error) {
       console.log(error);
@@ -68,12 +65,6 @@ export default function OrderTable() {
       <Header />
       <br />
       <div style={{ fontWeight: 'bold', fontSize: 'xx-large', fontFamily: 'monospace', textAlign: 'center' }}>Buy Products Dashboard</div>
-      <div style={{ marginTop: '10px', marginBottom: '10px' }}>
-        <Button style={{ marginRight: '10px', marginLeft: '10px', backgroundColor: 'lightblue', border: '1px solid lightblue', borderRadius: '4px', color: '#566161' }} onClick={() => openDialog('Add User Number')}>
-          Add User
-        </Button>
-        <Button style={{ backgroundColor: 'lightblue', border: '1px solid lightblue', borderRadius: '4px', color: '#566161' }} onClick={() => openDialog('Remove User Number')}>Remove User</Button>
-      </div>
       <div style={{ flex: 1, marginBottom: '10px', display: 'flex', justifyContent: 'center', background: '#d8dfeb' }}>
         {data && data.length>0 ? (
         <DataGrid

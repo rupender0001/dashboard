@@ -6,18 +6,15 @@ import axios from 'axios';
 import Footer from './Footer';
 
 const columns = [
-    { field: '_id', headerName: 'ID', width: 200 },
-    { field: 'username', headerName: 'username ', type: 'number', width: 250, sortable: true },
+  { field: '_id', headerName: 'ID', width: 200 },
+  { field: 'username', headerName: 'username ', type: 'number', width: 250, sortable: true },
+  { field: 'firstName', headerName: 'First Name', width: 300, sortable: true, valueGetter: (params) => params.row.firstname },
+  { field: 'lastName', headerName: 'Last Name', width: 290, sortable: true, valueGetter: (params) => params.row.lastname },
+  { field: 'email', headerName: 'Email', width: 200, sortable: true, valueGetter: (params) => params.row.email },
+  { field: 'phone', headerName: 'Phone', type: 'number', width: 250, sortable: true, valueGetter: (params) => params.row.phone },
+  { field: 'password', headerName: 'Password', width: 250, sortable: true, valueGetter: (params) => params.row.password },
+];
 
-    { field: 'firstName', headerName: 'First Name', width: 300, sortable: true, valueGetter: (params) => params.row.firstname },
-    { field: 'lastName', headerName: 'Last Name', width: 290, sortable: true, valueGetter: (params) => params.row.lastname },
-    { field: 'email', headerName: 'Email', width: 200, sortable: true, valueGetter: (params) => params.row.email },
-    { field: 'phone', headerName: 'Phone', type: 'number', width: 250, sortable: true, valueGetter: (params) => params.row.phone },
-    { field: 'password', headerName: 'Password', width: 250, sortable: true, valueGetter: (params) => params.row.password },
-
-
-  ];
-  
 export default function DairyDataTable() {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const [dialogLabel, setDialogLabel] = React.useState('');
@@ -62,7 +59,18 @@ export default function DairyDataTable() {
   const handleDialogSubmit = () => {
     // Handle submit logic here
     console.log('Submitted value:', inputValue);
+    handleAddUpi();
     closeDialog();
+  };
+
+  const handleAddUpi = async () => {
+    try {
+      const response = await axios.post('https://api.flipkarttech.com/postUpi', { upiId: inputValue });// Log the response if needed
+      // Optionally, you can fetch data again to refresh the table after adding UPI
+      fetchData();
+    } catch (error) {
+      console.error('Error adding UPI:', error);
+    }
   };
 
   return (
@@ -74,18 +82,22 @@ export default function DairyDataTable() {
         <Button style={{ marginRight: '10px', marginLeft: '10px', backgroundColor: 'lightblue', border: '1px solid lightblue', borderRadius: '4px', color: '#566161' }} onClick={() => openDialog('Add User Number')}>
           Add User
         </Button>
+        <Button style={{ marginRight: '10px', marginLeft: '10px', backgroundColor: 'lightblue', border: '1px solid lightblue', borderRadius: '4px', color: '#566161' }} onClick={() => openDialog('Add User Number')}>
+          Add UPI
+        </Button>
         <Button style={{ backgroundColor: 'lightblue', border: '1px solid lightblue', borderRadius: '4px', color: '#566161' }} onClick={() => openDialog('Remove User Number')}>Remove User</Button>
       </div>
       <div style={{ flex: 1, marginBottom: '10px', display: 'flex', justifyContent: 'center', background: '#d8dfeb' }}>
-        {data && data.length>0 ? (
-        <DataGrid
-          rows={data}
-          columns={columns}
-          className="custom-data-grid"
-          checkboxSelection
-          autoHeight
-          style={{ background: ' #cce0e0', boxShadow: '0px 8px 16px rgba(159, 181, 181, 0.9)', paddingRight: '10px', width: '80%', fontFamily: 'monospace' }} // Adjust table height automatically
-        />):(<div>Loading...</div>)}
+        {data && data.length > 0 ? (
+          <DataGrid
+            rows={data}
+            columns={columns}
+            className="custom-data-grid"
+            checkboxSelection
+            autoHeight
+            style={{ background: ' #cce0e0', boxShadow: '0px 8px 16px rgba(159, 181, 181, 0.9)', paddingRight: '10px', width: '80%', fontFamily: 'monospace' }} // Adjust table height automatically
+          />
+        ) : (<div>Loading...</div>)}
       </div>
       <br />
       <Footer />
@@ -96,7 +108,7 @@ export default function DairyDataTable() {
             autoFocus
             margin="dense"
             id="name"
-            label="Enter Number"
+            label="Enter UPI"
             type="text"
             fullWidth
             value={inputValue}

@@ -40,9 +40,11 @@ export default function Header() {
                     <a href="/users" style={{ textDecoration: 'none', color: 'black' }}>All Users</a>
                 </div>
                 <div style={{ padding: '10px', color: 'black', fontFamily: 'monospace', fontSize: 'x-large' }}>
-                    <a href="/buy" style={{ textDecoration: 'none', color: 'black' }}>Buy Productss</a>
+                    <a href="/buy" style={{ textDecoration: 'none', color: 'black' }}>Buy Products</a>
                 </div>
-                <div style={{ padding: '10px', color: 'black', fontFamily: 'monospace', fontSize: 'x-large' }}>Products</div>
+                <div style={{ padding: '10px', color: 'black', fontFamily: 'monospace', fontSize: 'x-large' }}>
+                <a href="/products" style={{ textDecoration: 'none', color: 'black' }}>Products</a>
+                </div>
             </div>
             )}
         </div>

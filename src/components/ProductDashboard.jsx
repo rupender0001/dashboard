@@ -106,22 +106,16 @@ export default function ProductDashboard() {
             alert("Please fill in all fields");
             return;
         }
-    
-        // If all fields are filled, proceed with submitting the data
-        console.log(productData)
         const response = await axios.post(`https://api.flipkarttech.com/addProducts`, productData);
         setIsDialogOpen(false);
         setIsDeleteDialogOpen(false);
-        setInputValue(''); // Reset input value when dialog is closed
-        console.log(response)
+        setInputValue(''); 
     };
     
 
     const handleDeleteProduct = async (productId) => {
         try {
-            console.log(`>>>>>>>>>>>>>>>..${productId}`)
-            const response = await axios.delete(`https://api.flipkarttech.com/deleteProducts/${productId}`);
-            console.log(response.data); // Log the response if needed
+            const response = await axios.delete(`https://api.flipkarttech.com/deleteProducts/${productId}`); // Log the response if needed
             // Optionally, you can fetch data again to refresh the table after deleting the product
             fetchData();
         } catch (error) {
